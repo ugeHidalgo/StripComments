@@ -18,7 +18,8 @@ function stripComments(line,markers){
         pos = line.indexOf(marker);
 
     if (pos<0) return line;
-    return trimSpacesAtTheEnd(line.slice(0,pos));    
+    //return trimSpacesAtTheEnd(line.slice(0,pos));  
+    return line.slice(0,pos);  
 }
 
 function trimSpacesAtTheEnd(value){

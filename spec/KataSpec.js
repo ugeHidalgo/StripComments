@@ -35,7 +35,7 @@ describe('Kata', function() {
           expect(result).toEqual('apples, pears')
         });
 
-        it('should remove chars after marker in a single line string including white spaces', function() {
+      /*  it('should remove chars after marker in a single line string including white spaces', function() {
           var result = solution('apples, pears    # and bananas', ["#"]);
 
           expect(result).toEqual('apples, pears')
@@ -45,7 +45,7 @@ describe('Kata', function() {
           var result = solution('   apples, pears    # and bananas', ["#"]);
 
           expect(result).toEqual('   apples, pears')
-        });
+        }); */
     });
 
     describe ('and more than one line',function(){
@@ -63,11 +63,16 @@ describe('Kata', function() {
         });
 
         it('should remove chars after marker in each line string', function() {
-          var result = solution('apples, pears# lemons \nand bananas', ["#"]);
+          var result = solution('apples, pears # lemons \nand bananas', ["#"]);
 
           expect(result).toEqual('apples, pears \nand bananas')
         });
 
+        it('should be able to test case exposed in kata with one marker only', function() {
+          var result = solution('apples, pears # and bananas\ngrapes\nbananas apples', ["#"]);
+
+          expect(result).toEqual('apples, pears \ngrapes\nbananas apples')
+      }); 
     });
   });
   
@@ -77,31 +82,41 @@ describe('Kata', function() {
     expect(result).toEqual('apples, pears\ngrapes\nbananas')
   });  
   */
+    describe ('when more than one marker',function(){
+        describe ('and one line',function(){
 
-  describe ('getLines ',function(){
+        });
 
-    it('should return 1 line for a string without "\\n"', function() {
-      var result = getLines('apples, pears and bananas');
-
-      expect(result[0]).toEqual('apples, pears and bananas');
-      expect(result.length).toBe(1);
+        describe ('and more than one line',function(){
+          
+        });
     });
 
-    it('should return 2 lines for a string with one "\\n"', function() {
-      var result = getLines('apples, pears \nand bananas');
 
-      expect(result[0]).toEqual('apples, pears ');
-      expect(result[1]).toEqual('and bananas');
-      expect(result.length).toBe(2);
+    describe ('getLines ',function(){
+
+      it('should return 1 line for a string without "\\n"', function() {
+        var result = getLines('apples, pears and bananas');
+
+        expect(result[0]).toEqual('apples, pears and bananas');
+        expect(result.length).toBe(1);
+      });
+
+      it('should return 2 lines for a string with one "\\n"', function() {
+        var result = getLines('apples, pears \nand bananas');
+
+        expect(result[0]).toEqual('apples, pears ');
+        expect(result[1]).toEqual('and bananas');
+        expect(result.length).toBe(2);
+      });
+
+      it('should return 3 lines for a string with two "\\n"', function() {
+        var result = getLines('apples, pears \nbananas, pinneapples \nand something more ');
+
+        expect(result[0]).toEqual('apples, pears ');
+        expect(result[1]).toEqual('bananas, pinneapples ');
+        expect(result[2]).toEqual('and something more ');
+        expect(result.length).toBe(3);
+      });
     });
-
-    it('should return 3 lines for a string with two "\\n"', function() {
-      var result = getLines('apples, pears \nbananas, pinneapples \nand something more ');
-
-      expect(result[0]).toEqual('apples, pears ');
-      expect(result[1]).toEqual('bananas, pinneapples ');
-      expect(result[2]).toEqual('and something more ');
-      expect(result.length).toBe(3);
-    });
-  });
 });
