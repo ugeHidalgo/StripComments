@@ -5,41 +5,22 @@ function solution(input, markers){
     if (Object.prototype.toString.call( markers )!="[object Array]") return input;
     if (markers.length===0) return input;
     
-    lines = getLines(input);
+    lines = input.split('\n');
     for (var i=0; i<lines.length; i++){
         result += stripComments(lines[i],markers);
         if (i<lines.length-1) result += '\n';
     }
-    return result;
+    return result.trim();
 }
 
 function stripComments(line,markers){
-    var marker = markers[0],
+    var marker; 
+    
+    markers.forEach(function(marker){
         pos = line.indexOf(marker);
-
-    if (pos<0) return line;
-    //return trimSpacesAtTheEnd(line.slice(0,pos));  
-    return line.slice(0,pos);  
-}
-
-function trimSpacesAtTheEnd(value){
-    var pos = value.length-1;
-
-    while (value[pos]===' ' && pos>0){
-        pos=pos-1;        
-    }
-    return value.slice(0,pos+1);
-}
-
-function getLines(value){
-    var lines = [], 
-        pos = value.indexOf('\n');
-
-    while (pos >0){
-        lines.push (value.slice(0,pos));
-        value = value.slice(pos+1,value.length);
-        pos = value.indexOf('\n')
-    }    
-    lines.push (value);
-    return lines;
+        if (pos<0) return;
+        line = line.slice(0,pos);
+    });    
+    
+    return line.trim();
 }
